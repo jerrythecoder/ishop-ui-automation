@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+### Folders that their contents shouldn't be committed
+target/*
+src/com/ishoptest/demotest/*

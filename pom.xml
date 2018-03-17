@@ -2,7 +2,7 @@
   
   <modelVersion>4.0.0</modelVersion>
   
-  <groupId>com.jtc</groupId>
+  <groupId>com.ishoptest</groupId>
   <artifactId>ishop-ui-automation</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
@@ -31,6 +31,8 @@
           <suiteXmlFiles>
             <suiteXmlFile>${testNgConfigFile}</suiteXmlFile>
           </suiteXmlFiles>
+          <!-- Parallel testing would be achieved by TestNG instead of surefire plugin -->
+          <forkCount>1</forkCount>
         </configuration>
       </plugin>
     </plugins>

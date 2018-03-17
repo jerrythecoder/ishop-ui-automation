@@ -1,14 +1,20 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Demo Suite">
+<suite name="iShop Test Suite" configfailurepolicy="continue" parallel="classes" thread-count="2">
+
+	<parameter name="remoteServerUrl" value="http://localhost:4444/wd/hub"></parameter>
+	<parameter name="testUrl" value="http://13.58.145.207:8080/ishop/"></parameter>
 	
-	<test name="Demo Test" preserve-order="true">
+	<test name="Sanity Test on Firefox" preserve-order="true">
+	
+		<parameter name="browser" value="firefox"></parameter>
+	
 		<groups>
 			<run></run>
 		</groups>
 		
 		<packages>
-			<package name="com.ishop.demotest"/>
+			<package name="com.ishoptest.testsuite.sanity"/>
 		</packages>
 	</test>
 
