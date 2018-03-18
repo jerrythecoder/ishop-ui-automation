@@ -1,8 +1,8 @@
 package com.ishoptest.pageobjects;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+
+import com.ishoptest.pageobjects.utils.WebElementHelper;
 
 /**
  * Models the website's Home page.
@@ -12,22 +12,30 @@ import org.openqa.selenium.support.FindBy;
  */
 public class NavigationBar {
 	
-	private WebDriver driver;
+	protected WebDriver driver;
+	protected WebElementHelper helper;
 	
 	public NavigationBar(WebDriver driver) {
 		this.driver = driver;
+		this.helper = new WebElementHelper(driver);
 	}
 	
-	/*
-	 * Temporary String values to be moved to properties files.
-	 */
-	private static final String x_sign_in_link = "//div[@id='navbar']//a[text()='Sign In']";
 	
-	@FindBy(xpath = x_sign_in_link)
-	private WebElement signInLink;
+	/*---------------------------- Locator Keys -------------------------*/
+	
+	protected static final String signInLink = "x-navi-sign-in-link";
+	protected static final String signUpLink = "x-navi-sign-up-link";
+	
+	
+	
+	/*-------------------------- Page Object APIs ----------------------*/
 	
 	public void clickOnSignInLink() {
-		signInLink.click();
+		helper.get(signInLink).click();
+	}
+	
+	public void clickOnSignUpLink() {
+		helper.get(signUpLink).click();
 	}
 
 }

@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import com.ishoptest.core.Base;
 
-public class GoToLoginPageFromHome extends Base {
+public class GoToSignInPageFromHome extends Base {
 	
 	/*
 	 * A very simple test to validate framework structure. To be removed.

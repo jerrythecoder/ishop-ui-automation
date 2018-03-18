@@ -1,33 +1,39 @@
 package com.ishoptest.core;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import com.ishoptest.pageobjects.utils.LocatorPropertyHelper;
+
 /**
  * Entrance point of testing for the framework. Core functionalities including:
- * - Initiate WebDriver.
- * - Define test suite level set-up/tear-down works.
- * - Define test class level set-up/tear-down works.
+ * - Initiates thread local WebDriver instances.
+ * - Executes test suite and test class level set-up / tear-down works.
  * 
  * @author Jerry
  *
  */
 public class Base {
 	
+	// Thread local page initializer.
 	public static ThreadLocal<PageInitializer> page = new ThreadLocal<>();
+	
+	// Thread local WebDriver instance used by different test case.
 	public static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+	
+	// Static locator properties helper. To be initialized before test suite starting.
+	public static LocatorPropertyHelper locatorHelper;
 
 	/**
 	 * Executes Set-up works to be done before executing the entire test suite.
 	 */
 	@BeforeSuite(alwaysRun = true)
 	public void executeBeforeSuite() {
-		// TODO Prepare test data for entire test suite.
+		// Instantiates locator properties helper.
+		locatorHelper = new LocatorPropertyHelper();
 	}
 	
 	/**
@@ -43,6 +49,8 @@ public class Base {
 		// Initializes page objects specific to driver instance and thread.
 		driver.set(WebDriverFactory.getDriver(remoteServerUrl, browser));
 		page.set(new PageInitializer(driver.get()));
+		
+		// Preparation works before tests.
 		driver.get().manage().window().maximize();
 		driver.get().get(testUrl);
 	}
