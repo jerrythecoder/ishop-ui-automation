@@ -2,6 +2,7 @@ package com.ishoptest.pageobjects;
 
 import org.openqa.selenium.WebDriver;
 
+import com.ishoptest.core.Log;
 import com.ishoptest.pageobjects.utils.WebElementHelper;
 
 /**
@@ -31,10 +32,12 @@ public class NavigationBar {
 	/*-------------------------- Page Object APIs ----------------------*/
 	
 	public void clickOnSignInLink() {
+		Log.info(this.getClass().getSimpleName() + ": click on Sign In link");
 		helper.get(signInLink).click();
 	}
 	
 	public void clickOnSignUpLink() {
+		Log.info(this.getClass().getSimpleName() + ": click on Sign Up link");
 		helper.get(signUpLink).click();
 	}
 

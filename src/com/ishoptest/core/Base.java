@@ -1,6 +1,5 @@
 package com.ishoptest.core;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
@@ -9,20 +8,21 @@ import org.testng.annotations.Parameters;
 import com.ishoptest.pageobjects.utils.LocatorPropertyHelper;
 
 /**
- * Entrance point of testing for the framework. Core functionalities including:
- * - Initiates thread local WebDriver instances.
+ * This is the entry point of testing for the framework. Core functionalities including:
  * - Executes test suite and test class level set-up / tear-down works.
+ * - Initializing test specific objects including: WebDriver, Page Objects etc.
  * 
  * @author Jerry
  *
  */
 public class Base {
 	
-	// Thread local page initializer.
-	public static ThreadLocal<PageInitializer> page = new ThreadLocal<>();
+	/**
+	 * The static thread local TestHandler handles test specific objects per thread in 
+	 * parallel tests. Ensures each test thread accessing separated object instances.
+	 */
+	public static ThreadLocal<TestHandler> test = new ThreadLocal<>();
 	
-	// Thread local WebDriver instance used by different test case.
-	public static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 	
 	// Static locator properties helper. To be initialized before test suite starting.
 	public static LocatorPropertyHelper locatorHelper;
@@ -32,6 +32,7 @@ public class Base {
 	 */
 	@BeforeSuite(alwaysRun = true)
 	public void executeBeforeSuite() {
+		Log.info("@BeforeSuite");
 		// Instantiates locator properties helper.
 		locatorHelper = new LocatorPropertyHelper();
 	}
@@ -42,17 +43,11 @@ public class Base {
 	@BeforeClass(alwaysRun = true)
 	@Parameters({"remoteServerUrl", "browser", "testUrl"})
 	public void executeBeforeClass(String remoteServerUrl, String browser, String testUrl) {
-		
-		System.out.println("@BeforeClass, " + "server: " + remoteServerUrl 
+		Log.info("@BeforeClass, " + "server: " + remoteServerUrl 
 				+ ", browser: " + browser);
 		
-		// Initializes page objects specific to driver instance and thread.
-		driver.set(WebDriverFactory.getDriver(remoteServerUrl, browser));
-		page.set(new PageInitializer(driver.get()));
-		
-		// Preparation works before tests.
-		driver.get().manage().window().maximize();
-		driver.get().get(testUrl);
+		test.set(new TestHandler(remoteServerUrl, browser, testUrl));
+		test.get().initializeTest();
 	}
 	
 	/**
@@ -60,7 +55,8 @@ public class Base {
 	 */
 	@AfterClass(alwaysRun = true)
 	public void executeAfterClass() {
-		driver.get().quit();
+		test.get().finalizeTest();
+		Log.info("@AfterClass");
 	}
 	
 }
