@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import com.ishoptest.core.logging.Log;
 import com.ishoptest.pageobjects.utils.LocatorPropertyHelper;
 
 /**
@@ -22,7 +23,6 @@ public class Base {
 	 * parallel tests. Ensures each test thread accessing separated object instances.
 	 */
 	public static ThreadLocal<TestHandler> test = new ThreadLocal<>();
-	
 	
 	// Static locator properties helper. To be initialized before test suite starting.
 	public static LocatorPropertyHelper locatorHelper;

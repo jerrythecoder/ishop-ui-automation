@@ -2,6 +2,7 @@ package com.ishoptest.core;
 
 import org.openqa.selenium.WebDriver;
 
+import com.ishoptest.core.logging.LoggingContextHelper;
 import com.ishoptest.pageobjects.NavigationBar;
 
 /**
@@ -12,10 +13,18 @@ import com.ishoptest.pageobjects.NavigationBar;
  */
 public class PageInitializer {
 	
+	public LoggingContextHelper loggingHelper;
+	
 	public NavigationBar navi;
 	
 	public PageInitializer(WebDriver driver) {
-		navi = new NavigationBar(driver);
+		//navi = new NavigationBar(driver);
+		
+		loggingHelper = new LoggingContextHelper();
+		loggingHelper.initializeAOPContext();
+		
+		navi = loggingHelper.getLoggingDestinatinClass(NavigationBar.class);
+		navi.setDriver(driver);
 	}
 
 }

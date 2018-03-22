@@ -2,6 +2,8 @@ package com.ishoptest.core;
 
 import org.openqa.selenium.WebDriver;
 
+import com.ishoptest.core.logging.Log;
+
 /**
  * Initializes all thread local objects for a single test in parallel testing.
  * 
