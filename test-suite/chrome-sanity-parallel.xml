@@ -2,21 +2,16 @@
 
 <suite name="iShop Test Suite" configfailurepolicy="continue" parallel="classes" thread-count="2">
 	
-	<!-- Local Selenium Grid server -->
-	<!-- <parameter name="remoteServerUrl" value="http://localhost:4444/wd/hub"></parameter> -->
-	
 	<!-- Jenkins Selenium Grid server -->
 	<parameter name="remoteServerUrl" value="http://localhost:4444/wd/hub"></parameter>
 	
 	<!-- Address of the test website - AWS -->
 	<parameter name="testUrl" value="http://13.58.145.207:8080/ishop/"></parameter>
 	
-	<!-- Address of the test website - Local Ubuntu -->
-	<!-- <parameter name="testUrl" value="http://localhost:8080/ishop/"></parameter> -->
 	
 	<test name="Sanity Test on Firefox" preserve-order="true">
 	
-		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="browser" value="chrome"></parameter>
 		
 		<groups>
 			<run></run>
