@@ -1,10 +1,6 @@
 package com.ishoptest.pageobjects;
 
-import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
-
-import com.ishoptest.core.logging.Log;
-import com.ishoptest.pageobjects.utils.WebElementHelper;
 
 /**
  * Models the website's Home page.
@@ -13,43 +9,23 @@ import com.ishoptest.pageobjects.utils.WebElementHelper;
  *
  */
 @Component
-public class NavigationBar {
-	
-	protected WebDriver driver;
-	protected WebElementHelper helper;
-	
-	public NavigationBar() {
-		
-	}
-	
-	public NavigationBar(WebDriver driver) {
-		this.driver = driver;
-		this.helper = new WebElementHelper(driver);
-	}
-	
-	public void setDriver(WebDriver driver) {
-		this.driver = driver;
-		this.helper = new WebElementHelper(driver);
-	}
-	
+public class NavigationBar extends PageObjectBase {	
 	
 	/*---------------------------- Locator Keys -------------------------*/
 	
-	protected static final String signInLink = "x-navi-sign-in-link";
-	protected static final String signUpLink = "x-navi-sign-up-link";
+	protected static final String SIGN_IN_LINK = "x-navi-sign-in-link";
+	protected static final String SIGN_UP_LINK = "x-navi-sign-up-link";
 	
 	
 	
 	/*-------------------------- Page Object APIs ----------------------*/
 	
 	public void clickOnSignInLink() {
-		Log.info(this.getClass().getSimpleName() + ": click on Sign In link");
-		helper.get(signInLink).click();
+		helper.get(SIGN_IN_LINK).click();
 	}
 	
 	public void clickOnSignUpLink() {
-		Log.info(this.getClass().getSimpleName() + ": click on Sign Up link");
-		helper.get(signUpLink).click();
+		helper.get(SIGN_UP_LINK).click();
 	}
 
 }

@@ -27,7 +27,14 @@ public class LocatorPropertyHelper {
 		this.locatorProperties = new Properties();
 		
 		try {
-			this.locatorProperties.load(new FileInputStream(propertyFolderPath + "NavigationBar.properties"));
+			this.locatorProperties.load(
+					new FileInputStream(propertyFolderPath + "NavigationBar.properties"));
+			
+			this.locatorProperties.load(
+					new FileInputStream(propertyFolderPath + "SignInPage.properties"));
+			
+			// To load more files ...
+			
 		} catch (FileNotFoundException e) {
 			// TODO Add log error here ...
 			e.printStackTrace();

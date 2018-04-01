@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import com.ishoptest.core.TestClassBase;
 
-public class GoToSignInPageFromHome extends TestClassBase {
+public class SignUp extends TestClassBase {
 	
 	/*
 	 * A very simple test to validate framework structure. To be removed.
@@ -12,6 +12,8 @@ public class GoToSignInPageFromHome extends TestClassBase {
 	@Test
 	public void doTest() {
 		navi.clickOnSignInLink();
+		signin.enterPassword("testme");
+		signin.clickSignInBtn();
 	}
 
 }
